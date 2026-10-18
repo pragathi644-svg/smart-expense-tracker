@@ -33,7 +33,25 @@
                 <p id="remainingBudget">₹5,000.00</p>
             </div>
         </section>
+        <!-- Modify monthly budget -->
+        <section class="panel">
+            <h2>Set Monthly Budget</h2>
 
+            <label for="budgetInput">Enter your monthly budget (₹)</label>
+            <input
+                type="number"
+                id="budgetInput"
+                min="1"
+                step="1"
+                placeholder="e.g. 10000"
+                required
+            >
+
+            <button type="button" id="updateBudgetBtn">
+                Update Budget
+            </button>
+            <p id="budgetMessage"></p>
+        </section>
         <!-- Add expense form -->
         <section class="panel">
             <h2>Add New Expense</h2>

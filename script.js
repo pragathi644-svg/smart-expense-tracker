@@ -12,9 +12,12 @@ const searchExpense = document.getElementById("searchExpense");
 
 const totalSpent = document.getElementById("totalSpent");
 const monthlyBudget = document.getElementById("monthlyBudget");
+const budgetInput = document.getElementById("budgetInput");
+const updateBudgetBtn = document.getElementById("updateBudgetBtn");
+const budgetMessage = document.getElementById("budgetMessage");
 const remainingBudget = document.getElementById("remainingBudget");
 
-const BUDGET = 10000;
+let BUDGET = Number(localStorage.getItem("monthlyBudget")) || 10000;
 let expenses = [];
 
 try {
@@ -235,3 +238,24 @@ filterCategory.addEventListener("change", renderExpenses);
 searchExpense.addEventListener("input", renderExpenses);
 
 renderExpenses();
+// Set the budget input to the saved budget
+budgetInput.value = BUDGET;
+
+// Update monthly budget
+updateBudgetBtn.addEventListener("click", () => {
+    const newBudget = Number(budgetInput.value);
+
+    if (!Number.isFinite(newBudget) || newBudget <= 0) {
+        budgetMessage.textContent = "Please enter a valid budget greater than ₹0.";
+        budgetMessage.style.color = "#b42318";
+        return;
+    }
+
+    BUDGET = newBudget;
+    localStorage.setItem("monthlyBudget", String(BUDGET));
+
+    budgetMessage.textContent = "Monthly budget updated successfully!";
+    budgetMessage.style.color = "#176b45";
+
+    renderExpenses();
+});
